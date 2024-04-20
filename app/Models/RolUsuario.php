@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class RolUsuario extends Model
 {
     use HasFactory;
+
+    // Nombre de la tabla en MySQL
+    protected $table='rol_usuarios';
+
+    // Atributos que se pueden asignar de manera masiva.
     protected $fillable=[
         'nombre'
     ];

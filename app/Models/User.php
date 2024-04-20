@@ -6,24 +6,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    // Nombre de la tabla en MySQL
+    protected $table='historial_conversions';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
+    // Atributos que se pueden asignar de manera masiva.
     protected $fillable = [
         'email_usuario',
-        'email_verified_at',
         'nombre_usuario',
-        'password',
         'rol_id',
         'telefono_usuario',
-        'tipo_documento_usuario',
     ];
 
     /**
@@ -32,7 +35,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 

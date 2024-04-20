@@ -15,10 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre_usuario');
             $table->string('email_usuario')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('telefono_usuario')->nullable();
-            $table->string('tipo_documento_usuario')->unique()->nullable();
-            $table->string('password');
             $table->unsignedBigInteger('rol_id')->default(2);
             $table->foreign('rol_id')->references('id')->on('rol_usuarios');
             $table->rememberToken();

@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Empresa extends Model
 {
     use HasFactory;
+
+
+    // Nombre de la tabla en MySQL
+    protected $table='empresas';
+
+    // Atributos que se pueden asignar de manera masiva.
     protected $fillable=[
         'direccion_empresa',
         'estado_empresa',
