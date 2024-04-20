@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     // Nombre de la tabla en MySQL
-    protected $table='historial_conversions';
+    protected $table='users';
 
     /**
      * The attributes that are mass assignable.

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('telefono_usuario')->nullable();
             $table->unsignedBigInteger('rol_id')->default(2);
             $table->foreign('rol_id')->references('id')->on('rol_usuarios');
-            $table->rememberToken();
             $table->timestamps();
         });
 
