@@ -219,6 +219,7 @@ class UserApiController extends Controller
 
     }
 
+
     // Filtros
     // Encontrar usuarios que sean propietarios de empresas
     public function findUsersEmpresa(){
