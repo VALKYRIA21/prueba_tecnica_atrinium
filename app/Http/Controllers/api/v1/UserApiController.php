@@ -218,4 +218,23 @@ class UserApiController extends Controller
         return response()->json($data, 200);
 
     }
+
+    // Filtros
+    // Encontrar usuarios que sean propietarios de empresas
+    public function findUsersEmpresa(){
+        $usuariosPropietarios = User::has('empresa')->get();
+        if($usuariosPropietarios->isEmpty()){
+            $data = [
+                'message' => 'No hay usuarios propietarios de empresas',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'message' => 'Usuarios propietarios de empresas',
+            'usuarios_propietarios' => $usuariosPropietarios,
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
 }

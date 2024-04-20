@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\V1\UserApiController;
 use App\Http\Controllers\Api\V1\EmpresaApiController;
+use App\Http\Controllers\Api\V1\ActividadEmpresaApiController;
+
 
 Route::prefix('v1')->group(function () {
 
@@ -24,6 +26,8 @@ Route::prefix('v1')->group(function () {
     Route::delete('/delete/users/{id}', [UserApiController::class, 'destroy']);
     // Ruta para cambiar el rol de un usuario basico a admin
     Route::put('/change/role/users/{id}', [UserApiController::class, 'changeRole']);
+    // Ruta para filtrar (Encontrar usuarios que sean propietarios de empresas)
+    Route::get('/filter/users/empresa', [UserApiController::class, 'findUsersEmpresa']);
 
     // Empresa routes
     // Ruta para test
@@ -38,8 +42,21 @@ Route::prefix('v1')->group(function () {
     Route::put('/update/empresas/{id}', [EmpresaApiController::class, 'update']);
     // Ruta para eliminar una empresa
     Route::delete('/delete/empresas/{id}', [EmpresaApiController::class, 'destroy']);
+    // Ruta para filtrar (Encontrar empresas que no tengan actividades)
+    Route::get('/filter/empresas/actividades', [EmpresaApiController::class, 'findEmpresasSinActividades']);
 
     // Actividad Empresa routes
     // Ruta para test
     Route::get('/test_actividad_empresa', [ActividadEmpresaApiController::class, 'index']);
+    // Ruta para mostrar todas las actividades de las empresas
+    Route::get('/actividades_empresas', [ActividadEmpresaApiController::class, 'show']);
+    // Ruta para mostrar una actividad de una empresa en especifico
+    Route::get('/actividades_empresas/{id}', [ActividadEmpresaApiController::class, 'showActividadEmpresa']);
+    // Ruta para almacenar una nueva actividad de una empresa
+    Route::post('/create/actividad_empresa', [ActividadEmpresaApiController::class, 'store']);
+    // Ruta para actualizar una actividad de una empresa
+    Route::put('/update/actividades_empresas/{id}', [ActividadEmpresaApiController::class, 'update']);
+    // Ruta para eliminar una actividad de una empresa
+    Route::delete('/delete/actividades_empresas/{id}', [ActividadEmpresaApiController::class, 'destroy']);
+
 });

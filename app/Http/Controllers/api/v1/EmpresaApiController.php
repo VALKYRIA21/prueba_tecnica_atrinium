@@ -191,4 +191,22 @@ class EmpresaApiController extends Controller
         return response()->json($data, 200);
     }
     // Creando un nuevo método, para eliminar una empresa
+
+    // Creando un nuevo método, para filtrar las empresas que no tienen actividades
+    public function findEmpresasSinActividades(){
+        $empresas = Empresa::doesntHave('actividades')->get();
+        if($empresas->isEmpty()){
+            $data = [
+                'message' => 'No hay empresas sin actividades',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'message'   => 'Empresas sin actividades',
+            'empresas' => $empresas,
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
 }

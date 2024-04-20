@@ -32,7 +32,7 @@ class Empresa extends Model
     // Una empresa puede tener muchas actividades
     public function actividades()
     {
-        return $this->hasMany(ActividadEmpresa::class);
+        return $this->hasMany(ActividadEmpresa::class, 'empresa_id');
     }
     // Una empresa puede tener un estado
     public function estado()

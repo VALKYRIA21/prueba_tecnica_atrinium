@@ -54,7 +54,7 @@ class User extends Authenticatable
     // Un usuario puede tener una empresa
     public function empresa()
     {
-        return $this->hasOne(Empresa::class);
+        return $this->hasOne(Empresa::class, 'usuario_id');
     }
 
     // Un usuario puede tener un rol
