@@ -1,5 +1,27 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
+# Guía de Configuración y Uso del Proyecto
+
+## Configuración del Entorno
+
+1. **Requisitos Previos:**
+    - PHP >= 7.4
+    - Composer
+    - MySQL (u otro sistema de gestión de bases de datos compatible)
+
+-   composer install
+-   Copiar el archivo .env.example y renombrarlo a .env.
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=prueba_tecnica_atrinium
+DB_USERNAME=root
+DB_PASSWORD=
+
+-   php artisan migrate:fresh --seed
+-   php artisan serve
+
 # API Documentation
 
 ## User Routes
@@ -203,6 +225,13 @@
 -   **Description:** Creates a new actividad empresa.
 -   **Controller Method:** `ActividadEmpresaApiController@store`
 -   **Request Body:** JSON object containing actividad empresa data.
+    ```json
+    {
+        "nombre": "Actividad 1",
+        "descripcion": "Descripción de la actividad 1",
+        "empresa_id": 2
+    }
+    ```
 
 ### Update Actividad Empresa
 
@@ -213,6 +242,13 @@
 -   **Parameters:**
     -   `id` (integer): ID of the actividad empresa to be updated.
 -   **Request Body:** JSON object containing updated actividad empresa data.
+    ```json
+    {
+        "nombre": "Nuevo Nombre de Actividad",
+        "descripcion": "Nueva descripción de la actividad",
+        "empresa_id": 3
+    }
+    ```
 
 ### Delete Actividad Empresa
 
