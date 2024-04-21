@@ -12,12 +12,12 @@
 -   composer install
 -   Copiar el archivo .env.example y renombrarlo a .env.
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=prueba_tecnica_atrinium
-DB_USERNAME=root
-DB_PASSWORD=
+-   DB_CONNECTION=mysql
+-   DB_HOST=127.0.0.1
+-   DB_PORT=3306
+-   DB_DATABASE=prueba_tecnica_atrinium
+-   DB_USERNAME=root
+-   DB_PASSWORD=
 
 -   php artisan migrate:fresh --seed
 -   php artisan serve
