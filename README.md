@@ -302,3 +302,15 @@
       "moneda_destino": "moneda_final"
     }
     ```
+
+## Comandos Artisan
+
+### currency:import
+
+Este comando permite importar los datos de la serie histórica de cambios de moneda ofrecida por el Banco Central Europeo en formato XML.
+
+#### Uso:
+
+```bash
+php artisan currency:import
+```
