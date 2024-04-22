@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('moneda_origen');
             $table->string('moneda_destino');
             $table->float('monto_origen');
-            $table->float('monto_destino');
             $table->float('monto_final');
             $table->timestamps();
         });

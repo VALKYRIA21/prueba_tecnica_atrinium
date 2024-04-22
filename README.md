@@ -258,3 +258,47 @@
 -   **Controller Method:** `ActividadEmpresaApiController@destroy`
 -   **Parameters:**
     -   `id` (integer): ID of the actividad empresa to be deleted.
+
+### Filtro Coincidencia
+
+-   **URL:** `/filter/coincidencias`
+-   **Method:** `POST`
+-   **Description:** Finds text matches in the listings of users, companies, and activities for at least 3 attributes of each model.
+-   **Controller Method:** `EmpresaApiController@findCoincidencias`
+-   **Request Body:** JSON object containing criteria for text matching.
+    ```json
+    {
+        "text": "Texto de búsqueda"
+    }
+    ```
+
+### Historial De Conversiones
+
+### Test Historial Conversion Route
+
+-   **URL:** `/test_historial_conversion`
+-   **Method:** `GET`
+-   **Description:** Endpoint for testing historial conversion API.
+-   **Controller Method:** `HistorialConversionApiController@index`
+
+### Show All Historiales de Conversión
+
+-   **URL:** `/historial_conversion`
+-   **Method:** `GET`
+-   **Description:** Retrieves all historiales de conversion.
+-   **Controller Method:** `HistorialConversionApiController@showAll`
+
+### Create Historial de Conversión
+
+-   **URL:** `/create/historial_conversion`
+-   **Method:** `POST`
+-   **Description:** Creates a new historial de conversion.
+-   **Controller Method:** `HistorialConversionApiController@store`
+-   **Request Body:** JSON object containing historial de conversion data.
+    ```json
+    {
+      "monto": monto,
+      "moneda_origen": "moneda_origen",
+      "moneda_destino": "moneda_final"
+    }
+    ```

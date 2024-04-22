@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\UserApiController;
 use App\Http\Controllers\Api\V1\EmpresaApiController;
 use App\Http\Controllers\Api\V1\ActividadEmpresaApiController;
+use App\Http\Controllers\Api\V1\HistorialConversionApiController;
 
 
 Route::prefix('v1')->group(function () {
@@ -29,6 +30,8 @@ Route::prefix('v1')->group(function () {
     // Ruta para filtrar (Encontrar usuarios que sean propietarios de empresas)
     Route::get('/filter/users/empresa', [UserApiController::class, 'findUsersEmpresa']);
 
+    // ----------------------------------------------------------------------------------------------------------
+
     // Empresa routes
     // Ruta para test
     Route::get('/test_empresa', [EmpresaApiController::class, 'index']);
@@ -45,6 +48,8 @@ Route::prefix('v1')->group(function () {
     // Ruta para filtrar (Encontrar empresas que no tengan actividades)
     Route::get('/filter/empresas/actividades', [EmpresaApiController::class, 'findEmpresasSinActividades']);
 
+    // ----------------------------------------------------------------------------------------------------------
+
     // Actividad Empresa routes
     // Ruta para test
     Route::get('/test_actividad_empresa', [ActividadEmpresaApiController::class, 'index']);
@@ -58,5 +63,21 @@ Route::prefix('v1')->group(function () {
     Route::put('/update/actividades_empresas/{id}', [ActividadEmpresaApiController::class, 'update']);
     // Ruta para eliminar una actividad de una empresa
     Route::delete('/delete/actividades_empresas/{id}', [ActividadEmpresaApiController::class, 'destroy']);
+
+    // ----------------------------------------------------------------------------------------------------------
+
+    // Filtro
+    // Filtrar encontrar coincidencias de texto en los listados de usuarios, empresas y actividades por al menos 3 atributos de cada modelo.
+    Route::post('/filter/coincidencias', [EmpresaApiController::class, 'findCoincidencias']);
+
+    // ----------------------------------------------------------------------------------------------------------
+
+    // Historial Conversion routes
+    // Ruta para test
+    Route::get('/test_historial_conversion', [HistorialConversionApiController::class, 'index']);
+    // Ruta para mostrar todos los historiales de conversion
+    Route::get('/historial_conversion', [HistorialConversionApiController::class, 'showAll']);
+    // Ruta para almacenar un nuevo historial de conversion
+    Route::post('/create/historial_conversion', [HistorialConversionApiController::class, 'store']);
 
 });

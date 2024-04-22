@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Validator;
 
 
 // Models
+use App\Models\User;
 use App\Models\Empresa;
+use App\Models\ActividadEmpresa;
 
 class EmpresaApiController extends Controller
 {
@@ -205,6 +207,63 @@ class EmpresaApiController extends Controller
         $data = [
             'message'   => 'Empresas sin actividades',
             'empresas' => $empresas,
+            'status' => 200
+        ];
+        return response()->json($data, 200);
+    }
+
+    // Filtro
+    // Creando un nuevo método, para filtrar encontrar coincidencias de texto en los listados de usuarios, empresas y actividades por al menos 3 atributos de cada modelo.
+    public function findCoincidencias(Request $request){
+
+
+        $validator = Validator::make($request->all(), [
+            'texto' => 'required|string|min:3'
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json(['errors' => $errors], 400);
+        }
+
+        $texto = $request->texto;
+        if(strlen($request->texto) < 3){
+            $data = [
+                'message' => 'El texto de coincidencia debe tener al menos 3 caracteres',
+                'status' => 400
+            ];
+            return response()->json($data, 400);
+        }
+
+
+        $usuarios = User::where('nombre_usuario', 'LIKE', "%$texto%")
+                        ->orWhere('email_usuario', 'LIKE', "%$texto%")
+                        ->orWhere('telefono_usuario', 'LIKE', "%$texto%")
+                        ->orWhere('rol_id', 'LIKE', "%$texto%")
+                        ->get();
+        $empresas = Empresa::where('nombre_empresa', 'LIKE', "%$texto%")
+                        ->orWhere('direccion_empresa', 'LIKE', "%$texto%")
+                        ->orWhere('telefono_empresa', 'LIKE', "%$texto%")
+                        ->orWhere('tipo_documento', 'LIKE', "%$texto%")
+                        ->orWhere('estado_id', 'LIKE', "%$texto%")
+                        ->orWhere('usuario_id', 'LIKE', "%$texto%")
+                        ->get();
+        $actividades = ActividadEmpresa::where('nombre', 'LIKE', "%$texto%")
+                        ->orWhere('descripcion', 'LIKE', "%$texto%")
+                        ->orWhere('empresa_id', 'LIKE', "%$texto%")
+                        ->get();
+        if($usuarios->isEmpty() && $empresas->isEmpty() && $actividades->isEmpty()){
+            $data = [
+                'message' => 'No se encontraron coincidencias',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'message' => 'Coincidencias encontradas',
+            'usuarios' => $usuarios,
+            'empresas' => $empresas,
+            'actividades' => $actividades,
             'status' => 200
         ];
         return response()->json($data, 200);
